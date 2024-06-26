@@ -1,8 +1,7 @@
 {
-  "name": "goit-node-rest-api",
+  "name": "e-pharmacy-franchise-back",
   "type": "module",
   "scripts": {
-    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest",
     "start": "node ./app.js",
     "dev": "nodemon ./app.js"
   },
