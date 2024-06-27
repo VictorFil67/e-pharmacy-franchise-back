@@ -2,7 +2,7 @@ import Joi from "joi";
 
 export const signupSchema = Joi.object({
   name: Joi.string()
-    .pattern(new RegExp(/^[a-zA-Z0-9_-]{3,15}$/))
+    .pattern(new RegExp(/^[a-zA-Z0-9 _-]{3,15}$/))
     .required()
     .error(
       (errors) =>
