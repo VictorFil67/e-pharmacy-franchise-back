@@ -24,28 +24,35 @@ const signup = async (req, res) => {
 
   const user = await findUser({ email });
   if (user) {
-    throw HttpError(409, "Email in use");
+    throw HttpError(
+      409,
+      "This email address is already in use. Please use another email address."
+    );
   }
 
-  const verificationToken = nanoid();
+  // const verificationToken = nanoid();
 
-  const avatarURL = gravatar.url(email);
+  // const avatarURL = gravatar.url(email);
 
-  const newUser = await register({ ...req.body, avatarURL, verificationToken });
+  // const newUser = await register({ ...req.body, avatarURL, verificationToken });
+  const newUser = await register(req.body);
 
-  const verifyEmail = {
-    to: email,
-    subject: "Verify email",
-    html: `<a target="_blank" href="${BASE_URL}/users/verify/${verificationToken}">CLick to verify email</a>`,
-  };
+  // const verifyEmail = {
+  //   to: email,
+  //   subject: "Verify email",
+  //   html: `<a target="_blank" href="${BASE_URL}/users/verify/${verificationToken}">CLick to verify email</a>`,
+  // };
 
-  await sendEmail(verifyEmail);
+  // await sendEmail(verifyEmail);
 
   res.status(201).json({
     user: {
+      name: newUser.name,
       email: newUser.email,
-      subscription: newUser.subscription,
-      avatarURL: newUser.avatarURL,
+      phone: newUser.phone,
+      // token: newUser.token,
+      // subscription: newUser.subscription,
+      // avatarURL: newUser.avatarURL,
     },
   });
 };
@@ -99,9 +106,7 @@ const signin = async (req, res) => {
   if (!user) {
     throw HttpError(401, "Email or password is wrong");
   }
-  if (!user.verify) {
-    throw HttpError(401, "Email not verify");
-  }
+
   const passwordCompare = await bcrypt.compare(password, user.password);
   if (!passwordCompare) {
     throw HttpError(401, "Email or password is wrong");
@@ -116,8 +121,9 @@ const signin = async (req, res) => {
   res.json({
     token,
     user: {
+      name: user.name,
       email: user.email,
-      subscription: user.subscription,
+      phone: user.phone,
     },
   });
 };

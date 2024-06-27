@@ -3,34 +3,27 @@ import { handleSaveError, setUpdateSetting } from "./hooks.js";
 
 const userSchema = new Schema(
   {
-    password: {
+    name: {
       type: String,
-      required: [true, "Password is required"],
+      required: [true, "Name is required"],
     },
     email: {
       type: String,
       required: [true, "Email is required"],
       unique: true,
     },
-    subscription: {
+    password: {
       type: String,
-      enum: ["starter", "pro", "business"],
-      default: "starter",
+      minlength: [8, "Password mast have at least 8 characters"],
+      required: [true, "Password is required"],
     },
-    avatarURL: {
+    phone: {
       type: String,
+      required: [true, "Phone nomber is required"],
     },
     token: {
       type: String,
       default: null,
-    },
-    verify: {
-      type: Boolean,
-      default: false,
-    },
-    verificationToken: {
-      type: String,
-      // required: [true, "Verify token is required"],
     },
   },
   { versionKey: false }
