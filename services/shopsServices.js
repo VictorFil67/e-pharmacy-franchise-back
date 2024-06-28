@@ -1,4 +1,4 @@
-import Contact from "../models/Contact.js";
+import Contact from "../models/Shop.js";
 
 export function listContacts() {
   return Contact.find();
