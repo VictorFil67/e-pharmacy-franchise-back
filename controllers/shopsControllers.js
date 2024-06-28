@@ -5,7 +5,7 @@ import {
   removeContactByFilter,
   updateStatusContactByFilter,
   updateContactByFilter,
-} from "../services/contactsServices.js";
+} from "../services/shopsServices.js";
 import HttpError from "../helpers/HttpError.js";
 import ctrlWrapper from "../decorators/ctrlWrapper.js";
 

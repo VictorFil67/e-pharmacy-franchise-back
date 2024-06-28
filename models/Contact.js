@@ -3,19 +3,36 @@ import { handleSaveError, setUpdateSetting } from "./hooks.js";
 
 const contactSchema = new Schema(
   {
-    name: {
+    shopName: {
       type: String,
       required: [true, "Set name for contact"],
     },
-    email: {
+    shopOwnerName: {
       type: String,
     },
-    phone: {
+    shopEmail: {
       type: String,
     },
-    favorite: {
-      type: Boolean,
-      default: false,
+    shopPhone: {
+      type: String,
+    },
+    shopStreet: {
+      type: String,
+    },
+    shopCity: {
+      type: String,
+    },
+    shopZip: {
+      type: String,
+    },
+    password: {
+      type: String,
+      minlength: [8, "Password mast have at least 8 characters"],
+      required: [true, "Password is required"],
+    },
+    shopOwnDelivery: {
+      type: String,
+      // default: false,
     },
     owner: {
       type: Schema.Types.ObjectId,

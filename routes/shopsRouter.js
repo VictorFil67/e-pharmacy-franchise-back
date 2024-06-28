@@ -1,5 +1,5 @@
 import express from "express";
-import contactsControllers from "../controllers/contactsControllers.js";
+import contactsControllers from "../controllers/shopsControllers.js";
 import validateBody from "../decorators/validateBody.js";
 import {
   createContactSchema,
