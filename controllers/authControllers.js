@@ -50,9 +50,6 @@ const signup = async (req, res) => {
       name: newUser.name,
       email: newUser.email,
       phone: newUser.phone,
-      // token: newUser.token,
-      // subscription: newUser.subscription,
-      // avatarURL: newUser.avatarURL,
     },
   });
 };

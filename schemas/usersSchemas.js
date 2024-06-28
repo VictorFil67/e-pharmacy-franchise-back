@@ -28,7 +28,6 @@ export const signupSchema = Joi.object({
       (errors) =>
         new Error(
           "The password may contain at least one upper case, lower case English letter, digit, and special character or space and have a length of at least 8 characters"
-          // "Invalid phone number. Please enter a valid phone number"
         )
     ),
   phone: Joi.string()
@@ -66,7 +65,6 @@ export const signinSchema = Joi.object({
       (errors) =>
         new Error(
           "The password may contain at least one upper case, lower case English letter, digit, and special character or space and have a length of at least 8 characters"
-          // "Invalid phone number. Please enter a valid phone number"
         )
     ),
 });
