@@ -26,8 +26,8 @@ authRouter.post("/register", validateBody(signupSchema), signup);
 authRouter.get("/verify/:verificationToken", verify);
 authRouter.post("/verify", validateBody(verifySchema), resendVerifyEmail);
 authRouter.post("/login", validateBody(signinSchema), signin);
-authRouter.get("/current", authtenticate, getCurrent);
-authRouter.post("/logout", authtenticate, logout);
+authRouter.get("/user-info", authtenticate, getCurrent);
+authRouter.get("/logout", authtenticate, logout);
 authRouter.patch("/", authtenticate, updateSubscription);
 authRouter.patch(
   "/avatars",
