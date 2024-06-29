@@ -40,7 +40,8 @@ export const signupSchema = Joi.object({
     .error(
       (errors) =>
         new Error(
-          "The phone number must be in the following format '+(123)(222) 123-45-67' with or '+' without '+', parentheses, spaces and hyphens"
+          "Must be the following format '+(123)(222) 123-45-67' or without '+', parentheses, spaces and hyphens"
+          // "The phone number must be in the following format '+(123)(222) 123-45-67' with or '+' without '+', parentheses, spaces and hyphens"
           // "Invalid phone number. Please enter a valid phone number"
           // Invalid format (only numbers, minus symbol, and one plus symbol are allowed).
         )
