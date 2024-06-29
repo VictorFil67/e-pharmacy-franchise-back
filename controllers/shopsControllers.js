@@ -8,6 +8,8 @@ import {
 } from "../services/shopsServices.js";
 import HttpError from "../helpers/HttpError.js";
 import ctrlWrapper from "../decorators/ctrlWrapper.js";
+import fs from "fs/promises";
+import cloudinary from "../helpers/cloudinary.js";
 
 const getAllContacts = async (req, res) => {
   console.log(req.query);
@@ -44,14 +46,18 @@ const deleteContact = async (req, res) => {
 
 const createShop = async (req, res) => {
   // const { _id: owner } = req.user;
+  const { url: shopLogoURL } = await cloudinary.uploader.upload(req.file.path, {
+    folder: "shopLogos",
+  });
+  const { path: oldPath } = req.file;
 
-  const result = await addShop(
-    // {
+  await fs.rm(oldPath);
+  const result = await addShop({
     // ...req.body,
-    req.body
+    ...req.body,
+    shopLogoURL,
     //  owner
-    // }
-  );
+  });
   res.status(201).json(result);
 };
 

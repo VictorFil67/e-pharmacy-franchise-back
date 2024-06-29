@@ -29,7 +29,7 @@ const {
 
 shopsRouter.post(
   "/create",
-  // upload.single("avatarURL"),
+  upload.single("shopLogoURL"),
   validateBody(createShopSchema),
   createShop
 );
@@ -44,3 +44,15 @@ shopsRouter.post(
 // contactsRouter.patch("/:id/favorite", isValidId, updateStatusContact);
 
 export default shopsRouter;
+
+// {
+//   "shopName": "victor571",
+//   "shopOwnerName": "victor57",
+//   "shopEmail": "victor51@mail.com.ua",
+//   "shopPhone": "+380671112233",
+//   "shopStreet": "victory",
+//   "shopCity": "kiyv",
+//   "shopZip": "10000",
+// "password": "88aA991*",
+// "shopOwnDelivery": "Yes"
+// }

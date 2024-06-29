@@ -42,6 +42,7 @@ const shopSchema = new Schema(
       enum: ["Yes", "No"],
       default: "Yes",
     },
+    shopLogoURL: { type: String },
     // owner: {
     //   type: Schema.Types.ObjectId,
     //   ref: "user",
