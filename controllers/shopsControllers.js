@@ -45,7 +45,8 @@ const deleteContact = async (req, res) => {
 };
 
 const createShop = async (req, res) => {
-  // const { _id: owner } = req.user;
+  const { _id: owner } = req.user;
+  console.log(req.user);
   const { url: shopLogoURL } = await cloudinary.uploader.upload(req.file.path, {
     folder: "shopLogos",
   });
@@ -56,7 +57,7 @@ const createShop = async (req, res) => {
     // ...req.body,
     ...req.body,
     shopLogoURL,
-    //  owner
+    owner,
   });
   res.status(201).json(result);
 };

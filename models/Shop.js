@@ -43,10 +43,10 @@ const shopSchema = new Schema(
       default: "Yes",
     },
     shopLogoURL: { type: String },
-    // owner: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "user",
-    // },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+    },
   },
   { versionKey: false }
 );
