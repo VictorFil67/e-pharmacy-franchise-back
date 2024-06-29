@@ -1,5 +1,5 @@
 import {
-  addContact,
+  addShop,
   listContactsByFilter,
   getContactByFilter,
   removeContactByFilter,
@@ -42,10 +42,16 @@ const deleteContact = async (req, res) => {
   res.status(200).json(result);
 };
 
-const createContact = async (req, res) => {
-  const { _id: owner } = req.user;
+const createShop = async (req, res) => {
+  // const { _id: owner } = req.user;
 
-  const result = await addContact({ ...req.body, owner });
+  const result = await addShop(
+    // {
+    // ...req.body,
+    req.body
+    //  owner
+    // }
+  );
   res.status(201).json(result);
 };
 
@@ -76,10 +82,10 @@ const updateStatusContact = async (req, res) => {
 };
 
 export default {
-  getAllContacts: ctrlWrapper(getAllContacts),
-  getOneContact: ctrlWrapper(getOneContact),
-  deleteContact: ctrlWrapper(deleteContact),
-  createContact: ctrlWrapper(createContact),
-  updateContact: ctrlWrapper(updateContact),
-  updateStatusContact: ctrlWrapper(updateStatusContact),
+  // getAllContacts: ctrlWrapper(getAllContacts),
+  // getOneContact: ctrlWrapper(getOneContact),
+  // deleteContact: ctrlWrapper(deleteContact),
+  createShop: ctrlWrapper(createShop),
+  // updateContact: ctrlWrapper(updateContact),
+  // updateStatusContact: ctrlWrapper(updateStatusContact),
 };

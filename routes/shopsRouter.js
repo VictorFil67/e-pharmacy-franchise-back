@@ -2,9 +2,9 @@ import express from "express";
 import shopsControllers from "../controllers/shopsControllers.js";
 import validateBody from "../decorators/validateBody.js";
 import {
-  createContactSchema,
-  updateContactSchema,
-} from "../schemas/contactsSchemas.js";
+  createShopSchema,
+  // updateContactSchema,
+} from "../schemas/shopsSchemas.js";
 import isValidId from "../middlewares/isValidId.js";
 import authtenticate from "../middlewares/authenticate.js";
 import upload from "../middlewares/upload.js";
@@ -17,7 +17,7 @@ const {
   getAllContacts,
   getOneContact,
   deleteContact,
-  createContact,
+  createShop,
   updateContact,
   updateStatusContact,
 } = shopsControllers;
@@ -27,12 +27,12 @@ const {
 
 // contactsRouter.delete("/:id", isValidId, deleteContact);
 
-// contactsRouter.post(
-//   "/",
-//   upload.single("avatarURL"),
-//   validateBody(createContactSchema),
-//   createContact
-// );
+shopsRouter.post(
+  "/create",
+  // upload.single("avatarURL"),
+  validateBody(createShopSchema),
+  createShop
+);
 
 // contactsRouter.put(
 //   "/:id",

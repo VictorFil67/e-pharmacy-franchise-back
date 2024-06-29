@@ -1,4 +1,4 @@
-import Contact from "../models/Shop.js";
+import Shop from "../models/Shop.js";
 
 export function listContacts() {
   return Contact.find();
@@ -23,8 +23,8 @@ export function removeContactByFilter(filter) {
   return Contact.findOneAndDelete(filter);
 }
 
-export function addContact(data) {
-  return Contact.create(data);
+export function addShop(data) {
+  return Shop.create(data);
 }
 
 export function updateContactById(contactId, data) {
