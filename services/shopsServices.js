@@ -12,8 +12,8 @@ export function getContactById(contactId) {
   return Contact.findById(contactId);
 }
 
-export function getContactByFilter(filter) {
-  return Contact.findOne(filter);
+export function getShopByFilter(filter) {
+  return Shop.findOne(filter);
 }
 
 export function removeContact(contactId) {

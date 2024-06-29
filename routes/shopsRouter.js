@@ -15,7 +15,7 @@ shopsRouter.use(authtenticate);
 
 const {
   getAllContacts,
-  getOneContact,
+  getShopInfo,
   deleteContact,
   createShop,
   updateContact,
@@ -23,7 +23,7 @@ const {
 } = shopsControllers;
 // contactsRouter.get("/", getAllContacts);
 
-// contactsRouter.get("/:id", isValidId, getOneContact);
+shopsRouter.get("/:id", isValidId, getShopInfo);
 
 // contactsRouter.delete("/:id", isValidId, deleteContact);
 

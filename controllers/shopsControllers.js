@@ -1,7 +1,7 @@
 import {
   addShop,
   listContactsByFilter,
-  getContactByFilter,
+  getShopByFilter,
   removeContactByFilter,
   updateStatusContactByFilter,
   updateContactByFilter,
@@ -22,11 +22,11 @@ const getAllContacts = async (req, res) => {
   res.json(result);
 };
 
-const getOneContact = async (req, res) => {
+const getShopInfo = async (req, res) => {
   const { id } = req.params;
-  console.log(req.user);
+  console.log(req.params);
   const { _id: owner } = req.user;
-  const result = await getContactByFilter({ _id: id, owner });
+  const result = await getShopByFilter({ _id: id, owner });
   if (!result) {
     throw HttpError(404);
   }
@@ -46,7 +46,6 @@ const deleteContact = async (req, res) => {
 
 const createShop = async (req, res) => {
   const { _id: owner } = req.user;
-  console.log(req.user);
   const { url: shopLogoURL } = await cloudinary.uploader.upload(req.file.path, {
     folder: "shopLogos",
   });
@@ -90,7 +89,7 @@ const updateStatusContact = async (req, res) => {
 
 export default {
   // getAllContacts: ctrlWrapper(getAllContacts),
-  // getOneContact: ctrlWrapper(getOneContact),
+  getShopInfo: ctrlWrapper(getShopInfo),
   // deleteContact: ctrlWrapper(deleteContact),
   createShop: ctrlWrapper(createShop),
   // updateContact: ctrlWrapper(updateContact),
