@@ -5,25 +5,32 @@ const shopSchema = new Schema(
   {
     shopName: {
       type: String,
-      required: [true, "Set name for contact"],
+      required: [true, "Set name for shop"],
     },
     shopOwnerName: {
       type: String,
+      required: [true, "Owner name is required"],
     },
     shopEmail: {
       type: String,
+      required: [true, "Email is required"],
+      unique: true,
     },
     shopPhone: {
       type: String,
+      required: [true, "Phone is required"],
     },
     shopStreet: {
       type: String,
+      required: [true, "Street Address is required"],
     },
     shopCity: {
       type: String,
+      required: [true, "City is required"],
     },
     shopZip: {
       type: String,
+      required: [true, "Zip/Postal is required"],
     },
     password: {
       type: String,
@@ -32,12 +39,13 @@ const shopSchema = new Schema(
     },
     shopOwnDelivery: {
       type: String,
-      // default: false,
+      enum: ["Yes", "No"],
+      default: "Yes",
     },
-    owner: {
-      type: Schema.Types.ObjectId,
-      ref: "user",
-    },
+    // owner: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "user",
+    // },
   },
   { versionKey: false }
 );
@@ -46,6 +54,6 @@ shopSchema.post("save", handleSaveError);
 shopSchema.pre("findOneAndUpdate", setUpdateSetting);
 shopSchema.post("findOneAndUpdate", handleSaveError);
 
-const Shop = model("contact", shopSchema);
+const Shop = model("shop", shopSchema);
 
 export default Shop;
