@@ -31,8 +31,8 @@ export function updateContactById(contactId, data) {
   return Contact.findByIdAndUpdate(contactId, data);
 }
 
-export function updateContactByFilter(filter, data) {
-  return Contact.findOneAndUpdate(filter, data);
+export function updateShopByFilter(filter, data) {
+  return Shop.findOneAndUpdate(filter, data);
 }
 
 export function updateStatusContactById(contactId, data) {

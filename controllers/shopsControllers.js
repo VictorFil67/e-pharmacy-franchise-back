@@ -4,7 +4,7 @@ import {
   getShopByFilter,
   removeContactByFilter,
   updateStatusContactByFilter,
-  updateContactByFilter,
+  updateShopByFilter,
 } from "../services/shopsServices.js";
 import HttpError from "../helpers/HttpError.js";
 import ctrlWrapper from "../decorators/ctrlWrapper.js";
@@ -61,13 +61,14 @@ const createShop = async (req, res) => {
   res.status(201).json(result);
 };
 
-const updateContact = async (req, res) => {
+const updateShop = async (req, res) => {
+  console.log(req.body);
   if (Object.keys(req.body).length === 0) {
     throw HttpError(400, "Body must have at least one field");
   }
   const { id } = req.params;
   const { _id: owner } = req.user;
-  const result = await updateContactByFilter({ _id: id, owner }, req.body);
+  const result = await updateShopByFilter({ _id: id, owner }, req.body);
   if (!result) {
     throw HttpError(404);
   }
@@ -92,6 +93,6 @@ export default {
   getShopInfo: ctrlWrapper(getShopInfo),
   // deleteContact: ctrlWrapper(deleteContact),
   createShop: ctrlWrapper(createShop),
-  // updateContact: ctrlWrapper(updateContact),
+  updateShop: ctrlWrapper(updateShop),
   // updateStatusContact: ctrlWrapper(updateStatusContact),
 };

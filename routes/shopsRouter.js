@@ -1,10 +1,7 @@
 import express from "express";
 import shopsControllers from "../controllers/shopsControllers.js";
 import validateBody from "../decorators/validateBody.js";
-import {
-  createShopSchema,
-  // updateContactSchema,
-} from "../schemas/shopsSchemas.js";
+import { createShopSchema, updateShopSchema } from "../schemas/shopsSchemas.js";
 import isValidId from "../middlewares/isValidId.js";
 import authtenticate from "../middlewares/authenticate.js";
 import upload from "../middlewares/upload.js";
@@ -18,7 +15,7 @@ const {
   getShopInfo,
   deleteContact,
   createShop,
-  updateContact,
+  updateShop,
   updateStatusContact,
 } = shopsControllers;
 // contactsRouter.get("/", getAllContacts);
@@ -34,12 +31,12 @@ shopsRouter.post(
   createShop
 );
 
-// contactsRouter.put(
-//   "/:id",
-//   isValidId,
-//   validateBody(updateContactSchema),
-//   updateContact
-// );
+shopsRouter.put(
+  "/:id/update",
+  isValidId,
+  validateBody(updateShopSchema),
+  updateShop
+);
 
 // contactsRouter.patch("/:id/favorite", isValidId, updateStatusContact);
 

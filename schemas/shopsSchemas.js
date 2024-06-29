@@ -12,9 +12,14 @@ export const createShopSchema = Joi.object({
   shopOwnDelivery: Joi.string().required({ allow: ["Yes", "No"] }),
 });
 
-// export const updateContactSchema = Joi.object({
-//   name: Joi.string(),
-//   email: Joi.string().email(),
-//   phone: Joi.string(),
-//   favorite: Joi.boolean(),
-// });
+export const updateShopSchema = Joi.object({
+  shopName: Joi.string(),
+  shopOwnerName: Joi.string(),
+  shopEmail: Joi.string().email(),
+  shopPhone: Joi.string(),
+  shopStreet: Joi.string(),
+  shopCity: Joi.string(),
+  shopZip: Joi.number().min(4),
+  password: Joi.string().min(8),
+  shopOwnDelivery: Joi.string(),
+});
