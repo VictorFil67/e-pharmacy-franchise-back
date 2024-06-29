@@ -7,10 +7,9 @@ export const createShopSchema = Joi.object({
   shopPhone: Joi.string().required(),
   shopStreet: Joi.string().required(),
   shopCity: Joi.string().required(),
-  shopZip: Joi.string().required(),
+  shopZip: Joi.number().required(),
   password: Joi.string().required(),
   shopOwnDelivery: Joi.string().required({ allow: ["Yes", "No"] }),
-  // favorite: Joi.boolean(),
 });
 
 // export const updateContactSchema = Joi.object({
