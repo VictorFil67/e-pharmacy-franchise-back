@@ -68,7 +68,16 @@ const updateShop = async (req, res) => {
   }
   const { id } = req.params;
   const { _id: owner } = req.user;
-  const result = await updateShopByFilter({ _id: id, owner }, req.body);
+  const { url: shopLogoURL } = await cloudinary.uploader.upload(req.file.path, {
+    folder: "shopLogos",
+  });
+  const { path: oldPath } = req.file;
+
+  await fs.rm(oldPath);
+  const result = await updateShopByFilter(
+    { _id: id, owner },
+    { ...req.body, shopLogoURL }
+  );
   if (!result) {
     throw HttpError(404);
   }

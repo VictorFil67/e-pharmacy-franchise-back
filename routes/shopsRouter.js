@@ -33,6 +33,7 @@ shopsRouter.post(
 
 shopsRouter.put(
   "/:id/update",
+  upload.single("shopLogoURL"),
   isValidId,
   validateBody(updateShopSchema),
   updateShop
