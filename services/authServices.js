@@ -13,3 +13,7 @@ export async function register(data) {
 export function setToken(id, token = "") {
   return User.findByIdAndUpdate(id, { token });
 }
+
+export function setTokens(id, token = "", refreshToken = "") {
+  return User.findByIdAndUpdate(id, { token, refreshToken });
+}

@@ -3,7 +3,7 @@ import path from "path";
 import gravatar from "gravatar";
 import Jimp from "jimp";
 
-import { register, setToken } from "../services/authServices.js";
+import { register, setToken, setTokens } from "../services/authServices.js";
 import ctrlWrapper from "../decorators/ctrlWrapper.js";
 import HttpError from "../helpers/HttpError.js";
 import sendEmail from "../helpers/sendEmail.js";
@@ -112,11 +112,16 @@ const signin = async (req, res) => {
     id: user._id,
   };
   const token = jwt.sign(payload, JWT_SECRET, {
-    expiresIn: "23h",
+    expiresIn: 60,
   });
-  await setToken(user.id, token);
+  const refreshToken = jwt.sign(payload, JWT_SECRET, {
+    expiresIn: "7d",
+  });
+  // await setToken(user.id, token);
+  await setTokens(user.id, token, refreshToken);
   res.json({
     token,
+    refreshToken,
     user: {
       name: user.name,
       email: user.email,
@@ -130,6 +135,23 @@ const getCurrent = async (req, res) => {
   res.json({
     email,
     name,
+  });
+};
+const getrefreshCurrent = async (req, res) => {
+  const user = req.user;
+  const payload = {
+    id: user._id,
+  };
+  const token = jwt.sign(payload, JWT_SECRET, {
+    expiresIn: 30,
+  });
+  const refreshToken = jwt.sign(payload, JWT_SECRET, {
+    expiresIn: "7d",
+  });
+  await setTokens(user.id, token, refreshToken);
+  res.json({
+    token,
+    refreshToken,
   });
 };
 
@@ -181,6 +203,6 @@ export default {
   signin: ctrlWrapper(signin),
   getCurrent: ctrlWrapper(getCurrent),
   logout: ctrlWrapper(logout),
-  updateSubscription: ctrlWrapper(updateSubscription),
+  getrefreshCurrent: ctrlWrapper(getrefreshCurrent),
   updateAvatar: ctrlWrapper(updateAvatar),
 };
