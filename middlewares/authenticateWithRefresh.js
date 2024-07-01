@@ -12,7 +12,7 @@ const authenticateWithRefresh = async (req, res, next) => {
   console.log(bearer);
   console.log(refreshToken);
   if (bearer !== "Bearer") {
-    return next(HttpError(401, "Not authorized Bearer"));
+    return next(HttpError(401, "No Bearer"));
   }
   try {
     const { id } = jwt.verify(refreshToken, JWT_SECRET);
@@ -24,8 +24,7 @@ const authenticateWithRefresh = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    next(HttpError(401, "Not authorized refreshToken"));
-    // console.log(error.message);
+    next(HttpError(401, "No refreshToken"));
   }
 };
 

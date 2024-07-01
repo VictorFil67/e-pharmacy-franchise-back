@@ -112,7 +112,7 @@ const signin = async (req, res) => {
     id: user._id,
   };
   const token = jwt.sign(payload, JWT_SECRET, {
-    expiresIn: 60,
+    expiresIn: "1h",
   });
   const refreshToken = jwt.sign(payload, JWT_SECRET, {
     expiresIn: "7d",
@@ -143,7 +143,7 @@ const getrefreshCurrent = async (req, res) => {
     id: user._id,
   };
   const token = jwt.sign(payload, JWT_SECRET, {
-    expiresIn: 30,
+    expiresIn: "1h",
   });
   const refreshToken = jwt.sign(payload, JWT_SECRET, {
     expiresIn: "7d",

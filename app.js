@@ -4,8 +4,9 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
-import contactsRouter from "./routes/shopsRouter.js";
+import shopsRouter from "./routes/shopsRouter.js";
 import authRouter from "./routes/authRouter.js";
+// import productsRouter from "./routes/productsRouter.js";
 
 dotenv.config();
 
@@ -17,7 +18,8 @@ app.use(express.json());
 app.use(express.static("public"));
 
 app.use("/api/user", authRouter);
-app.use("/api/shop", contactsRouter);
+app.use("/api/shop", shopsRouter);
+// app.use("/api/shop/:id", productsRouter);
 
 app.use((_, res) => {
   res.status(404).json({ message: "Route not found" });

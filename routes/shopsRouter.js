@@ -5,6 +5,7 @@ import { createShopSchema, updateShopSchema } from "../schemas/shopsSchemas.js";
 import isValidId from "../middlewares/isValidId.js";
 import authtenticate from "../middlewares/authenticate.js";
 import upload from "../middlewares/upload.js";
+import productsControllers from "../controllers/productsControllers.js";
 
 const shopsRouter = express.Router();
 
@@ -19,6 +20,7 @@ const {
   updateStatusContact,
 } = shopsControllers;
 // contactsRouter.get("/", getAllContacts);
+const { getAllProducts } = productsControllers;
 
 shopsRouter.get("/:id", isValidId, getShopInfo);
 
@@ -39,6 +41,7 @@ shopsRouter.put(
   updateShop
 );
 
+shopsRouter.get("/:id/product", isValidId, getAllProducts);
 // contactsRouter.patch("/:id/favorite", isValidId, updateStatusContact);
 
 export default shopsRouter;
