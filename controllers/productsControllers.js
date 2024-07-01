@@ -55,7 +55,7 @@ const addProduct = async (req, res) => {
   // const { path: oldPath } = req.file;
 
   // await fs.rm(oldPath);
-  const result = await createProduct(req.body);
+  const result = await createProduct({ ...req.body, owner });
   res.status(201).json(result);
 };
 
