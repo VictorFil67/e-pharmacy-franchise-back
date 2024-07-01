@@ -1,9 +1,9 @@
 import {
   addShop,
-  listContactsByFilter,
+  // listContactsByFilter,
   getShopByFilter,
-  removeContactByFilter,
-  updateStatusContactByFilter,
+  // removeContactByFilter,
+  // updateStatusContactByFilter,
   updateShopByFilter,
 } from "../services/shopsServices.js";
 import HttpError from "../helpers/HttpError.js";
@@ -25,27 +25,27 @@ const getAllProducts = async (req, res) => {
   res.json(result);
 };
 
-const getShopInfo = async (req, res) => {
-  const { id } = req.params;
-  console.log(req.params);
-  const { _id: owner } = req.user;
-  const result = await getShopByFilter({ _id: id, owner });
-  if (!result) {
-    throw HttpError(404);
-  }
-  res.json(result);
-};
+// const getShopInfo = async (req, res) => {
+//   const { id } = req.params;
+//   console.log(req.params);
+//   const { _id: owner } = req.user;
+//   const result = await getShopByFilter({ _id: id, owner });
+//   if (!result) {
+//     throw HttpError(404);
+//   }
+//   res.json(result);
+// };
 
-const deleteContact = async (req, res) => {
-  const { id } = req.params;
-  console.log(req.user);
-  const { _id: owner } = req.user;
-  const result = await removeContactByFilter({ _id: id, owner });
-  if (!result) {
-    throw HttpError(404);
-  }
-  res.status(200).json(result);
-};
+// const deleteContact = async (req, res) => {
+//   const { id } = req.params;
+//   console.log(req.user);
+//   const { _id: owner } = req.user;
+//   const result = await removeContactByFilter({ _id: id, owner });
+//   if (!result) {
+//     throw HttpError(404);
+//   }
+//   res.status(200).json(result);
+// };
 
 const addProduct = async (req, res) => {
   const { _id: owner } = req.user;
@@ -59,41 +59,41 @@ const addProduct = async (req, res) => {
   res.status(201).json(result);
 };
 
-const updateShop = async (req, res) => {
-  console.log(req.body);
-  if (Object.keys(req.body).length === 0) {
-    throw HttpError(400, "Body must have at least one field");
-  }
-  const { id } = req.params;
-  const { _id: owner } = req.user;
-  const { url: shopLogoURL } = await cloudinary.uploader.upload(req.file.path, {
-    folder: "shopLogos",
-  });
-  const { path: oldPath } = req.file;
+// const updateShop = async (req, res) => {
+//   console.log(req.body);
+//   if (Object.keys(req.body).length === 0) {
+//     throw HttpError(400, "Body must have at least one field");
+//   }
+//   const { id } = req.params;
+//   const { _id: owner } = req.user;
+//   const { url: shopLogoURL } = await cloudinary.uploader.upload(req.file.path, {
+//     folder: "shopLogos",
+//   });
+//   const { path: oldPath } = req.file;
 
-  await fs.rm(oldPath);
-  const result = await updateShopByFilter(
-    { _id: id, owner },
-    { ...req.body, shopLogoURL }
-  );
-  if (!result) {
-    throw HttpError(404);
-  }
-  res.status(200).json(result);
-};
+//   await fs.rm(oldPath);
+//   const result = await updateShopByFilter(
+//     { _id: id, owner },
+//     { ...req.body, shopLogoURL }
+//   );
+//   if (!result) {
+//     throw HttpError(404);
+//   }
+//   res.status(200).json(result);
+// };
 
-const updateStatusContact = async (req, res) => {
-  const { id } = req.params;
-  const { _id: owner } = req.user;
-  const result = await updateStatusContactByFilter(
-    { _id: id, owner },
-    req.body
-  );
-  if (!result) {
-    throw HttpError(404);
-  }
-  res.status(200).json(result);
-};
+// const updateStatusContact = async (req, res) => {
+//   const { id } = req.params;
+//   const { _id: owner } = req.user;
+//   const result = await updateStatusContactByFilter(
+//     { _id: id, owner },
+//     req.body
+//   );
+//   if (!result) {
+//     throw HttpError(404);
+//   }
+//   res.status(200).json(result);
+// };
 
 export default {
   getAllProducts: ctrlWrapper(getAllProducts),
