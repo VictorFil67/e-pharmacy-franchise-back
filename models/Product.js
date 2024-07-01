@@ -32,6 +32,6 @@ productSchema.post("save", handleSaveError);
 productSchema.pre("findOneAndUpdate", setUpdateSetting);
 productSchema.post("findOneAndUpdate", handleSaveError);
 
-const Product = model("medicine", productSchema);
+const Product = model("product", productSchema);
 
 export default Product;

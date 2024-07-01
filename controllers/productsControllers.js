@@ -10,7 +10,7 @@ import HttpError from "../helpers/HttpError.js";
 import ctrlWrapper from "../decorators/ctrlWrapper.js";
 import fs from "fs/promises";
 import cloudinary from "../helpers/cloudinary.js";
-import { listProducts } from "../services/productsServices.js";
+import { createProduct, listProducts } from "../services/productsServices.js";
 
 const getAllProducts = async (req, res) => {
   console.log(req.query);
@@ -47,20 +47,15 @@ const deleteContact = async (req, res) => {
   res.status(200).json(result);
 };
 
-const createShop = async (req, res) => {
+const addProduct = async (req, res) => {
   const { _id: owner } = req.user;
-  const { url: shopLogoURL } = await cloudinary.uploader.upload(req.file.path, {
-    folder: "shopLogos",
-  });
-  const { path: oldPath } = req.file;
+  // const { url: shopLogoURL } = await cloudinary.uploader.upload(req.file.path, {
+  //   folder: "shopLogos",
+  // });
+  // const { path: oldPath } = req.file;
 
-  await fs.rm(oldPath);
-  const result = await addShop({
-    // ...req.body,
-    ...req.body,
-    shopLogoURL,
-    owner,
-  });
+  // await fs.rm(oldPath);
+  const result = await createProduct(req.body);
   res.status(201).json(result);
 };
 
@@ -104,7 +99,7 @@ export default {
   getAllProducts: ctrlWrapper(getAllProducts),
   // getShopInfo: ctrlWrapper(getShopInfo),
   // deleteContact: ctrlWrapper(deleteContact),
-  // createShop: ctrlWrapper(createShop),
+  addProduct: ctrlWrapper(addProduct),
   // updateShop: ctrlWrapper(updateShop),
   // updateStatusContact: ctrlWrapper(updateStatusContact),
 };

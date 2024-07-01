@@ -20,7 +20,7 @@ const {
   updateStatusContact,
 } = shopsControllers;
 // contactsRouter.get("/", getAllContacts);
-const { getAllProducts } = productsControllers;
+const { getAllProducts, addProduct } = productsControllers;
 
 shopsRouter.get("/:id", isValidId, getShopInfo);
 
@@ -42,6 +42,7 @@ shopsRouter.put(
 );
 
 shopsRouter.get("/:id/product", isValidId, getAllProducts);
+shopsRouter.post("/:id/product/add", isValidId, addProduct);
 // contactsRouter.patch("/:id/favorite", isValidId, updateStatusContact);
 
 export default shopsRouter;
