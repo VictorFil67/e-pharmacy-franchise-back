@@ -21,8 +21,13 @@ const {
   updateStatusContact,
 } = shopsControllers;
 
-const { getAllProducts, addProduct, updateProductImg, getProductInfo } =
-  productsControllers;
+const {
+  getAllProducts,
+  addProduct,
+  updateProductImg,
+  getProductInfo,
+  updateProduct,
+} = productsControllers;
 
 shopsRouter.get("/:shopId", isValidShopId, getShopInfo);
 
@@ -46,6 +51,11 @@ shopsRouter.put(
 shopsRouter.get("/:shopId/product", isValidShopId, getAllProducts);
 shopsRouter.post("/:shopId/product/add", isValidShopId, addProduct);
 shopsRouter.get("/:shopId/product/:productId", isValidShopId, getProductInfo);
+shopsRouter.put(
+  "/:shopId/product/:productId/edit",
+  isValidShopId,
+  updateProduct
+);
 shopsRouter.patch(
   "/:shopId/product/:productId/Img",
   upload.single("productImgURL"),

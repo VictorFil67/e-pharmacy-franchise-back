@@ -64,6 +64,17 @@ const addProduct = async (req, res) => {
   res.status(201).json(result);
 };
 
+const updateProduct = async (req, res) => {
+  console.log(req.body);
+  if (Object.keys(req.body).length === 0) {
+    throw HttpError(400, "Body must have at least one field");
+  }
+  const { _id: owner } = req.user;
+  const { productId: _id } = req.params;
+  const result = await updateByFilter({ _id, owner }, { ...req.body });
+  res.status(200).json(result);
+};
+
 const updateProductImg = async (req, res) => {
   const { _id: owner } = req.user;
   const { productId: _id } = req.params;
@@ -77,7 +88,7 @@ const updateProductImg = async (req, res) => {
 
   await fs.rm(oldPath);
   const result = await updateByFilter({ _id, owner }, { productImgURL });
-  res.status(201).json(result);
+  res.status(200).json(result);
 };
 
 // const updateShop = async (req, res) => {
@@ -121,6 +132,6 @@ export default {
   getProductInfo: ctrlWrapper(getProductInfo),
   // deleteContact: ctrlWrapper(deleteContact),
   addProduct: ctrlWrapper(addProduct),
-  // updateShop: ctrlWrapper(updateShop),
+  updateProduct: ctrlWrapper(updateProduct),
   updateProductImg: ctrlWrapper(updateProductImg),
 };
