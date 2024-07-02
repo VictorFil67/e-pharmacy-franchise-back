@@ -24,6 +24,7 @@ const {
 
 const {
   getAllProducts,
+  getAllShopProducts,
   addProduct,
   updateProductImg,
   getProductInfo,
@@ -32,8 +33,6 @@ const {
 } = productsControllers;
 
 shopsRouter.get("/:shopId", isValidShopId, getShopInfo);
-
-// contactsRouter.delete("/:id", isValidId, deleteContact);
 
 shopsRouter.post(
   "/create",
@@ -50,7 +49,8 @@ shopsRouter.put(
   updateShop
 );
 
-shopsRouter.get("/:shopId/product", isValidShopId, getAllProducts);
+shopsRouter.get("/:shopId/all-products", getAllProducts);
+shopsRouter.get("/:shopId/product", isValidShopId, getAllShopProducts);
 shopsRouter.post("/:shopId/product/add", isValidShopId, addProduct);
 shopsRouter.get(
   "/:shopId/product/:productId",
