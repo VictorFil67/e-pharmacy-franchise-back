@@ -6,6 +6,7 @@ import isValidId from "../middlewares/isValidId.js";
 import authtenticate from "../middlewares/authenticate.js";
 import upload from "../middlewares/upload.js";
 import productsControllers from "../controllers/productsControllers.js";
+import isValidShopId from "../middlewares/isValidShopId.js";
 
 const shopsRouter = express.Router();
 
@@ -22,7 +23,7 @@ const {
 // contactsRouter.get("/", getAllContacts);
 const { getAllProducts, addProduct, updateProductImg } = productsControllers;
 
-shopsRouter.get("/:id", isValidId, getShopInfo);
+shopsRouter.get("/:shopId", isValidShopId, getShopInfo);
 
 // contactsRouter.delete("/:id", isValidId, deleteContact);
 
