@@ -15,7 +15,7 @@ const productSchema = new Schema(
       type: String,
       required: [true, "Description is required"],
     },
-    medicineImgURL: { type: String },
+    productImgURL: { type: String },
     shop: {
       type: Schema.Types.ObjectId,
       ref: "shop",

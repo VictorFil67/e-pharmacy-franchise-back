@@ -26,6 +26,8 @@ export function listProducts() {
 export function createProduct(data) {
   return Product.create(data);
 }
+export const updateByFilter = (filter, data) =>
+  Product.findOneAndUpdate(filter, data);
 
 // export function updateContactById(contactId, data) {
 //   return Contact.findByIdAndUpdate(contactId, data);

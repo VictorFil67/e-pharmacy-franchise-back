@@ -10,7 +10,11 @@ import HttpError from "../helpers/HttpError.js";
 import ctrlWrapper from "../decorators/ctrlWrapper.js";
 import fs from "fs/promises";
 import cloudinary from "../helpers/cloudinary.js";
-import { createProduct, listProducts } from "../services/productsServices.js";
+import {
+  createProduct,
+  listProducts,
+  updateByFilter,
+} from "../services/productsServices.js";
 
 const getAllProducts = async (req, res) => {
   console.log(req.query);
@@ -59,6 +63,22 @@ const addProduct = async (req, res) => {
   res.status(201).json(result);
 };
 
+const updateProductImg = async (req, res) => {
+  const { _id: owner } = req.user;
+  const { productId: _id } = req.params;
+  const { url: productImgURL } = await cloudinary.uploader.upload(
+    req.file.path,
+    {
+      folder: "productImges",
+    }
+  );
+  const { path: oldPath } = req.file;
+
+  await fs.rm(oldPath);
+  const result = await updateByFilter({ _id, owner }, { productImgURL });
+  res.status(201).json(result);
+};
+
 // const updateShop = async (req, res) => {
 //   console.log(req.body);
 //   if (Object.keys(req.body).length === 0) {
@@ -97,9 +117,9 @@ const addProduct = async (req, res) => {
 
 export default {
   getAllProducts: ctrlWrapper(getAllProducts),
-  // getShopInfo: ctrlWrapper(getShopInfo),
+  // addProductImg: ctrlWrapper(addProductImg),
   // deleteContact: ctrlWrapper(deleteContact),
   addProduct: ctrlWrapper(addProduct),
   // updateShop: ctrlWrapper(updateShop),
-  // updateStatusContact: ctrlWrapper(updateStatusContact),
+  updateProductImg: ctrlWrapper(updateProductImg),
 };
