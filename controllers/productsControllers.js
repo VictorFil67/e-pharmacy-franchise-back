@@ -13,7 +13,7 @@ import {
 
 const getAllProducts = async (_, res) => {
   const result = await listProducts();
-  console.log(result);
+  // console.log(id);
   res.json(result);
 };
 const getAllShopProducts = async (req, res) => {

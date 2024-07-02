@@ -49,7 +49,7 @@ shopsRouter.put(
   updateShop
 );
 
-shopsRouter.get("/:shopId/all-products", getAllProducts);
+shopsRouter.get("/all/products", getAllProducts);
 shopsRouter.get("/:shopId/product", isValidShopId, getAllShopProducts);
 shopsRouter.post("/:shopId/product/add", isValidShopId, addProduct);
 shopsRouter.get(
