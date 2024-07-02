@@ -20,7 +20,7 @@ const {
   updateShop,
   updateStatusContact,
 } = shopsControllers;
-// contactsRouter.get("/", getAllContacts);
+
 const { getAllProducts, addProduct, updateProductImg } = productsControllers;
 
 shopsRouter.get("/:shopId", isValidShopId, getShopInfo);
@@ -50,7 +50,6 @@ shopsRouter.patch(
   isValidShopId,
   updateProductImg
 );
-// contactsRouter.patch("/:id/favorite", isValidId, updateStatusContact);
 
 export default shopsRouter;
 

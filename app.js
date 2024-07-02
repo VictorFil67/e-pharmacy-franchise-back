@@ -19,7 +19,6 @@ app.use(express.static("public"));
 
 app.use("/api/user", authRouter);
 app.use("/api/shop", shopsRouter);
-// app.use("/api/shop/:id", productsRouter);
 
 app.use((_, res) => {
   res.status(404).json({ message: "Route not found" });
