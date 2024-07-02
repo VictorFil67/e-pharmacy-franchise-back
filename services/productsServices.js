@@ -44,3 +44,9 @@ export const updateByFilter = (filter, data) =>
 // export function updateStatusContactByFilter(filter, data) {
 //   return Contact.findOneAndUpdate(filter, data);
 // }
+
+// "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODQxYWYwNTRlNDZmNGVmZmQxZDJhNCIsImlhdCI6MTcxOTkzMzc0NSwiZXhwIjoxNzE5OTM3MzQ1fQ.3jdHWtrLYiu5y8waNArY9iK6HWsyJfUKhZ30tGsiQw4",
+//     "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODQxYWYwNTRlNDZmNGVmZmQxZDJhNCIsImlhdCI6MTcxOTkzMzc0NSwiZXhwIjoxNzIwNTM4NTQ1fQ.faTDo8bI2cquY-sWAojMa7EabCcE13t-RpWKDNPEFJ4"
+
+// "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2N2RjMWVjODU1MzkzOGE0MTc1ZDg2MCIsImlhdCI6MTcxOTkzNDEzNCwiZXhwIjoxNzE5OTM3NzM0fQ.kYKEyff3sMVs5XG5AJwzqZByTNoPub1mYfepfmSS--w",
+// "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2N2RjMWVjODU1MzkzOGE0MTc1ZDg2MCIsImlhdCI6MTcxOTkzNDEzNCwiZXhwIjoxNzIwNTM4OTM0fQ.RMxPzRkVCnPdyIe8d1oK04AbvB5b4AGbQgbYKc8h9g8",
