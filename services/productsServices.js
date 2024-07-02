@@ -8,12 +8,12 @@ export function listProducts() {
 //   return Contact.find(filter, "", query);
 // }
 
-// export function getContactById(contactId) {
-//   return Contact.findById(contactId);
-// }
+export function getProductById(contactId) {
+  return Product.findById(contactId);
+}
 
-// export function getShopByFilter(filter) {
-//   return Shop.findOne(filter);
+// export function getProductByFilter(filter) {
+//   return Product.findOne(filter);
 // }
 
 // export function removeContact(contactId) {

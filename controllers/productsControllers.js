@@ -12,6 +12,7 @@ import fs from "fs/promises";
 import cloudinary from "../helpers/cloudinary.js";
 import {
   createProduct,
+  getProductById,
   listProducts,
   updateByFilter,
 } from "../services/productsServices.js";
@@ -29,16 +30,16 @@ const getAllProducts = async (req, res) => {
   res.json(result);
 };
 
-// const getShopInfo = async (req, res) => {
-//   const { id } = req.params;
-//   console.log(req.params);
-//   const { _id: owner } = req.user;
-//   const result = await getShopByFilter({ _id: id, owner });
-//   if (!result) {
-//     throw HttpError(404);
-//   }
-//   res.json(result);
-// };
+const getProductInfo = async (req, res) => {
+  const { productId: _id } = req.params;
+  console.log(req.params);
+  // const { _id: owner } = req.user;
+  const result = await getProductById(_id);
+  if (!result) {
+    throw HttpError(404);
+  }
+  res.json(result);
+};
 
 // const deleteContact = async (req, res) => {
 //   const { id } = req.params;
@@ -117,7 +118,7 @@ const updateProductImg = async (req, res) => {
 
 export default {
   getAllProducts: ctrlWrapper(getAllProducts),
-  // addProductImg: ctrlWrapper(addProductImg),
+  getProductInfo: ctrlWrapper(getProductInfo),
   // deleteContact: ctrlWrapper(deleteContact),
   addProduct: ctrlWrapper(addProduct),
   // updateShop: ctrlWrapper(updateShop),
