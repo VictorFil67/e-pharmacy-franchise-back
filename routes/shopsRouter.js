@@ -7,6 +7,7 @@ import authtenticate from "../middlewares/authenticate.js";
 import upload from "../middlewares/upload.js";
 import productsControllers from "../controllers/productsControllers.js";
 import isValidShopId from "../middlewares/isValidShopId.js";
+import isValidProductId from "../middlewares/isValidProductId.js";
 
 const shopsRouter = express.Router();
 
@@ -51,21 +52,29 @@ shopsRouter.put(
 
 shopsRouter.get("/:shopId/product", isValidShopId, getAllProducts);
 shopsRouter.post("/:shopId/product/add", isValidShopId, addProduct);
-shopsRouter.get("/:shopId/product/:productId", isValidShopId, getProductInfo);
+shopsRouter.get(
+  "/:shopId/product/:productId",
+  isValidShopId,
+  isValidProductId,
+  getProductInfo
+);
 shopsRouter.put(
   "/:shopId/product/:productId/edit",
   isValidShopId,
+  isValidProductId,
   updateProduct
 );
 shopsRouter.patch(
   "/:shopId/product/:productId/Img",
   upload.single("productImgURL"),
   isValidShopId,
+  isValidProductId,
   updateProductImg
 );
 shopsRouter.delete(
   "/:shopId/product/:productId/delete",
   isValidShopId,
+  isValidProductId,
   deleteProduct
 );
 
