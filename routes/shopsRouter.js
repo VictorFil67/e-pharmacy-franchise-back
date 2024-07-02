@@ -27,6 +27,7 @@ const {
   updateProductImg,
   getProductInfo,
   updateProduct,
+  deleteProduct,
 } = productsControllers;
 
 shopsRouter.get("/:shopId", isValidShopId, getShopInfo);
@@ -61,6 +62,11 @@ shopsRouter.patch(
   upload.single("productImgURL"),
   isValidShopId,
   updateProductImg
+);
+shopsRouter.delete(
+  "/:shopId/product/:productId/delete",
+  isValidShopId,
+  deleteProduct
 );
 
 export default shopsRouter;

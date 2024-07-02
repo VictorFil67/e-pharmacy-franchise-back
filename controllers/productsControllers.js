@@ -14,6 +14,7 @@ import {
   createProduct,
   getProductById,
   listProducts,
+  removeProductByFilter,
   updateByFilter,
 } from "../services/productsServices.js";
 
@@ -41,16 +42,15 @@ const getProductInfo = async (req, res) => {
   res.json(result);
 };
 
-// const deleteContact = async (req, res) => {
-//   const { id } = req.params;
-//   console.log(req.user);
-//   const { _id: owner } = req.user;
-//   const result = await removeContactByFilter({ _id: id, owner });
-//   if (!result) {
-//     throw HttpError(404);
-//   }
-//   res.status(200).json(result);
-// };
+const deleteProduct = async (req, res) => {
+  const { _id: owner } = req.user;
+  const { productId: _id } = req.params;
+  const result = await removeProductByFilter({ _id, owner });
+  if (!result) {
+    throw HttpError(404);
+  }
+  res.status(200).json(result);
+};
 
 const addProduct = async (req, res) => {
   const { _id: owner } = req.user;
@@ -130,7 +130,7 @@ const updateProductImg = async (req, res) => {
 export default {
   getAllProducts: ctrlWrapper(getAllProducts),
   getProductInfo: ctrlWrapper(getProductInfo),
-  // deleteContact: ctrlWrapper(deleteContact),
+  deleteProduct: ctrlWrapper(deleteProduct),
   addProduct: ctrlWrapper(addProduct),
   updateProduct: ctrlWrapper(updateProduct),
   updateProductImg: ctrlWrapper(updateProductImg),

@@ -19,9 +19,9 @@ export function getProductById(productId) {
 // export function removeContact(contactId) {
 //   return Contact.findByIdAndDelete(contactId);
 // }
-// export function removeContactByFilter(filter) {
-//   return Contact.findOneAndDelete(filter);
-// }
+export function removeProductByFilter(filter) {
+  return Product.findOneAndDelete(filter);
+}
 
 export function createProduct(data) {
   return Product.create(data);
