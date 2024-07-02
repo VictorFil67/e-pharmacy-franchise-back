@@ -66,7 +66,7 @@ const updateShop = async (req, res) => {
   if (Object.keys(req.body).length === 0) {
     throw HttpError(400, "Body must have at least one field");
   }
-  const { id } = req.params;
+  const { shopId } = req.params;
   const { _id: owner } = req.user;
   const { url: shopLogoURL } = await cloudinary.uploader.upload(req.file.path, {
     folder: "shopLogos",
@@ -75,7 +75,7 @@ const updateShop = async (req, res) => {
 
   await fs.rm(oldPath);
   const result = await updateShopByFilter(
-    { _id: id, owner },
+    { _id: shopId, owner },
     { ...req.body, shopLogoURL }
   );
   if (!result) {

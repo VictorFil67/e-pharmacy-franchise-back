@@ -35,19 +35,19 @@ shopsRouter.post(
 );
 
 shopsRouter.put(
-  "/:id/update",
+  "/:shopId/update",
   upload.single("shopLogoURL"),
-  isValidId,
+  isValidShopId,
   validateBody(updateShopSchema),
   updateShop
 );
 
-shopsRouter.get("/:id/product", isValidId, getAllProducts);
-shopsRouter.post("/:id/product/add", isValidId, addProduct);
+shopsRouter.get("/:shopId/product", isValidShopId, getAllProducts);
+shopsRouter.post("/:shopId/product/add", isValidShopId, addProduct);
 shopsRouter.patch(
-  "/:id/product/:productId/Img",
+  "/:shopId/product/:productId/Img",
   upload.single("productImgURL"),
-  isValidId,
+  isValidShopId,
   updateProductImg
 );
 // contactsRouter.patch("/:id/favorite", isValidId, updateStatusContact);
