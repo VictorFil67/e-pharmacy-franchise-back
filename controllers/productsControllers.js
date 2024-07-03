@@ -40,7 +40,7 @@ const deleteProduct = async (req, res) => {
   const { productId: _id } = req.params;
   const result = await removeProductByFilter({ _id, owner });
   if (!result) {
-    throw HttpError(404);
+    throw HttpError(403, `You don't have access to this action!`);
   }
   res.status(200).json(result);
 };
@@ -60,6 +60,9 @@ const updateProduct = async (req, res) => {
   const { _id: owner } = req.user;
   const { productId: _id } = req.params;
   const result = await updateByFilter({ _id, owner }, { ...req.body });
+  if (!result) {
+    throw HttpError(403, `You don't have access to this action!`);
+  }
   res.status(200).json(result);
 };
 

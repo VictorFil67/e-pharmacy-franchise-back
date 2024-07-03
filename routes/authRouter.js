@@ -24,8 +24,8 @@ const {
 } = authControllers;
 
 authRouter.post("/register", validateBody(signupSchema), signup);
-authRouter.get("/verify/:verificationToken", verify);
-authRouter.post("/verify", validateBody(verifySchema), resendVerifyEmail);
+// authRouter.get("/verify/:verificationToken", verify);
+// authRouter.post("/verify", validateBody(verifySchema), resendVerifyEmail);
 authRouter.post("/login", validateBody(signinSchema), signin);
 authRouter.get("/user-info", authtenticate, getCurrent);
 authRouter.get("/refreshCurrent", authenticateWithRefresh, getrefreshCurrent);
