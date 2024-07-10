@@ -29,7 +29,7 @@ authRouter.post("/register", validateBody(signupSchema), signup);
 authRouter.post("/login", validateBody(signinSchema), signin);
 authRouter.get("/user-info", authtenticate, getCurrent);
 authRouter.get("/refreshCurrent", authenticateWithRefresh, getrefreshCurrent);
-authRouter.get("/logout", authtenticate, logout);
+authRouter.post("/logout", authtenticate, logout);
 // authRouter.patch("/", authtenticate, updateSubscription);
 authRouter.patch(
   "/avatars",

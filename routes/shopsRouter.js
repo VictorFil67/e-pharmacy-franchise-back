@@ -14,12 +14,12 @@ const shopsRouter = express.Router();
 shopsRouter.use(authtenticate);
 
 const {
-  getAllContacts,
+  // getAllContacts,
   getShopInfo,
-  deleteContact,
+  // deleteContact,
   createShop,
   updateShop,
-  updateStatusContact,
+  // updateStatusContact,
 } = shopsControllers;
 
 const {

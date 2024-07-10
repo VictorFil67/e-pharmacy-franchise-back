@@ -33,14 +33,16 @@ export const signupSchema = Joi.object({
   phone: Joi.string()
     .pattern(
       new RegExp(
-        /^[\+]?[(]?[[0-9]{1,3}]?[)]?[(]?[0-9]{2,3}[)]?[s]?[0-9]{3}[-\s\.]?[0-9]{2}[-\s\.]?[0-9]{2}$/
+        // /^[\+]?[(]?[[0-9]{1,3}]?[)]?[(]?[0-9]{2,3}[)]?[s]?[0-9]{3}[-\s\.]?[0-9]{2}[-\s\.]?[0-9]{2}$/
+        /^[\+]?[0-9]{12}$/
       )
     )
     .required()
     .error(
-      (errors) =>
+      () =>
         new Error(
-          "Must be the following format '+(123)(222) 123-45-67' or without '+', parentheses, spaces and hyphens"
+          // "Must be the following format '+(123)(222) 123-45-67' or without '+', parentheses, spaces and hyphens"
+          "Must be 12 digits (+111222333444) with or without '+'"
           // "The phone number must be in the following format '+(123)(222) 123-45-67' with or '+' without '+', parentheses, spaces and hyphens"
           // "Invalid phone number. Please enter a valid phone number"
           // Invalid format (only numbers, minus symbol, and one plus symbol are allowed).

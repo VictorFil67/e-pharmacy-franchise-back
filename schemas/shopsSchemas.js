@@ -9,6 +9,7 @@ export const createShopSchema = Joi.object({
   shopCity: Joi.string().required(),
   shopZip: Joi.number().min(4).required(),
   password: Joi.string().min(8).required(),
+  shopLogoURL: Joi.any(),
   shopOwnDelivery: Joi.string().required({ allow: ["Yes", "No"] }),
 });
 
@@ -21,5 +22,6 @@ export const updateShopSchema = Joi.object({
   shopCity: Joi.string(),
   shopZip: Joi.number().min(4),
   password: Joi.string().min(8),
+  shopLogoURL: Joi.any(),
   shopOwnDelivery: Joi.string(),
 });

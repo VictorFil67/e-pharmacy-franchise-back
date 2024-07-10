@@ -43,7 +43,6 @@ const createShop = async (req, res) => {
 
   await fs.rm(oldPath);
   const result = await addShop({
-    // ...req.body,
     ...req.body,
     shopLogoURL,
     owner,

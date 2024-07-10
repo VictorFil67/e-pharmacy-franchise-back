@@ -137,6 +137,7 @@ const getCurrent = async (req, res) => {
     name,
   });
 };
+
 const getrefreshCurrent = async (req, res) => {
   const user = req.user;
   const payload = {
@@ -158,7 +159,7 @@ const getrefreshCurrent = async (req, res) => {
 const logout = async (req, res) => {
   const { _id } = req.user;
   await setToken(_id);
-  res.status(204).json();
+  res.json("Logout success!");
 };
 
 const updateSubscription = async (req, res) => {
