@@ -56,21 +56,50 @@ const updateShop = async (req, res) => {
     throw HttpError(400, "Body must have at least one field");
   }
   const { shopId } = req.params;
+  // const { shopLogoURL } = await getShopByFilter({ _id: shopId });
+  // console.log(shopLogoURL);
   const { _id: owner } = req.user;
-  const { url: shopLogoURL } = await cloudinary.uploader.upload(req.file.path, {
-    folder: "shopLogos",
-  });
-  const { path: oldPath } = req.file;
 
-  await fs.rm(oldPath);
-  const result = await updateShopByFilter(
-    { _id: shopId, owner },
-    { ...req.body, shopLogoURL }
-  );
-  if (!result) {
-    throw HttpError(404);
+  if (req.file?.path) {
+    const { url: shopLogoURL } = await cloudinary.uploader.upload(
+      req.file.path,
+      {
+        folder: "shopLogos",
+      }
+    );
+    const { path: oldPath } = req.file;
+
+    await fs.rm(oldPath);
+    const result = await updateShopByFilter(
+      { _id: shopId, owner },
+      { ...req.body, shopLogoURL }
+    );
+    if (!result) {
+      throw HttpError(404);
+    }
+    res.status(200).json(result);
+  } else {
+    const { shopLogoURL } = await getShopByFilter({ _id: shopId });
+    const result = await updateShopByFilter(
+      { _id: shopId, owner },
+      { ...req.body, shopLogoURL }
+    );
+    if (!result) {
+      throw HttpError(404);
+    }
+    res.status(200).json(result);
   }
-  res.status(200).json(result);
+
+  // url ? (shopLogoURL = url) : shopLogoURL;
+
+  // const result = await updateShopByFilter(
+  //   { _id: shopId, owner },
+  //   { ...req.body, shopLogoURL }
+  // );
+  // if (!result) {
+  //   throw HttpError(404);
+  // }
+  // res.status(200).json(result);
 };
 
 export default {
