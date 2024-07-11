@@ -52,9 +52,7 @@ const createShop = async (req, res) => {
 
 const updateShop = async (req, res) => {
   console.log(req.body);
-  if (Object.keys(req.body).length === 0) {
-    throw HttpError(400, "Body must have at least one field");
-  }
+
   const { shopId } = req.params;
   // const { shopLogoURL } = await getShopByFilter({ _id: shopId });
   // console.log(shopLogoURL);
@@ -79,6 +77,9 @@ const updateShop = async (req, res) => {
     }
     res.status(200).json(result);
   } else {
+    if (Object.keys(req.body).length === 0) {
+      throw HttpError(400, "Body must have at least one field");
+    }
     const { shopLogoURL } = await getShopByFilter({ _id: shopId });
     const result = await updateShopByFilter(
       { _id: shopId, owner },
