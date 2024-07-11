@@ -47,7 +47,22 @@ const createShop = async (req, res) => {
     shopLogoURL,
     owner,
   });
-  res.status(201).json(result);
+
+  let data = {};
+  data = {
+    shopName: result.shopName,
+    shopOwnerName: result.shopOwnerName,
+    shopEmail: result.shopEmail,
+    shopPhone: result.shopPhone,
+    shopStreet: result.shopStreet,
+    shopCity: result.shopCity,
+    shopZip: result.shopZip,
+    shopOwnDelivery: result.shopOwnDelivery,
+    shopLogoURL: result.shopLogoURL,
+    owner: data.owner,
+    _id: result._id,
+  };
+  res.status(201).json(data);
 };
 
 const updateShop = async (req, res) => {
@@ -75,7 +90,21 @@ const updateShop = async (req, res) => {
     if (!result) {
       throw HttpError(404);
     }
-    res.status(200).json(result);
+    let data = {};
+    data = {
+      shopName: result.shopName,
+      shopOwnerName: result.shopOwnerName,
+      shopEmail: result.shopEmail,
+      shopPhone: result.shopPhone,
+      shopStreet: result.shopStreet,
+      shopCity: result.shopCity,
+      shopZip: result.shopZip,
+      shopOwnDelivery: result.shopOwnDelivery,
+      shopLogoURL: result.shopLogoURL,
+      owner: data.owner,
+      _id: result._id,
+    };
+    res.status(200).json(data);
   } else {
     if (Object.keys(req.body).length === 0) {
       throw HttpError(400, "Body must have at least one field");
@@ -88,7 +117,21 @@ const updateShop = async (req, res) => {
     if (!result) {
       throw HttpError(404);
     }
-    res.status(200).json(result);
+    let data = {};
+    data = {
+      shopName: result.shopName,
+      shopOwnerName: result.shopOwnerName,
+      shopEmail: result.shopEmail,
+      shopPhone: result.shopPhone,
+      shopStreet: result.shopStreet,
+      shopCity: result.shopCity,
+      shopZip: result.shopZip,
+      shopOwnDelivery: result.shopOwnDelivery,
+      shopLogoURL: result.shopLogoURL,
+      owner: data.owner,
+      _id: result._id,
+    };
+    res.status(200).json(data);
   }
 
   // url ? (shopLogoURL = url) : shopLogoURL;
