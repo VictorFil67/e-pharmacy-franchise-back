@@ -24,7 +24,7 @@ import cloudinary from "../helpers/cloudinary.js";
 
 const getShopId = async (req, res) => {
   const { _id: owner } = req.user;
-  console.log(req.params);
+  console.log(req.user);
   // const { _id: owner } = req.user;
   // const result = await getShopByFilter({ _id: shopId, owner });
   const result = await getShopByFilter({ owner });
