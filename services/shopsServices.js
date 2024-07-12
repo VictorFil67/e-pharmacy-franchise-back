@@ -35,8 +35,15 @@ export async function addShop(data) {
 //   return Contact.findByIdAndUpdate(contactId, data);
 // }
 
-export function updateShopByFilter(filter, data) {
-  return Shop.findOneAndUpdate(filter, data);
+export async function updateShopByFilter(filter, data) {
+  const { password } = data;
+  if (password) {
+    const hashPassword = await bcrypt.hash(password, 10);
+    const hash = { ...data, password: hashPassword };
+    return Shop.findOneAndUpdate(filter, hash);
+  } else {
+    return Shop.findOneAndUpdate(filter, data);
+  }
 }
 
 // export function updateStatusContactById(contactId, data) {

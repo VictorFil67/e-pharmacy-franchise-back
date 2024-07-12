@@ -31,7 +31,21 @@ const getShopInfo = async (req, res) => {
   if (!result) {
     throw HttpError(404);
   }
-  res.json(result);
+  let data = {};
+  data = {
+    shopName: result.shopName,
+    shopOwnerName: result.shopOwnerName,
+    shopEmail: result.shopEmail,
+    shopPhone: result.shopPhone,
+    shopStreet: result.shopStreet,
+    shopCity: result.shopCity,
+    shopZip: result.shopZip,
+    shopOwnDelivery: result.shopOwnDelivery,
+    shopLogoURL: result.shopLogoURL,
+    owner: data.owner,
+    _id: result._id,
+  };
+  res.json(data);
 };
 
 const createShop = async (req, res) => {
@@ -69,8 +83,6 @@ const updateShop = async (req, res) => {
   console.log(req.body);
 
   const { shopId } = req.params;
-  // const { shopLogoURL } = await getShopByFilter({ _id: shopId });
-  // console.log(shopLogoURL);
   const { _id: owner } = req.user;
 
   if (req.file?.path) {
