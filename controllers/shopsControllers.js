@@ -22,6 +22,32 @@ import cloudinary from "../helpers/cloudinary.js";
 //   res.json(result);
 // };
 
+const getShopId = async (req, res) => {
+  const { _id: owner } = req.user;
+  console.log(req.params);
+  // const { _id: owner } = req.user;
+  // const result = await getShopByFilter({ _id: shopId, owner });
+  const result = await getShopByFilter({ owner });
+  if (!result) {
+    throw HttpError(404);
+  }
+  let data = {};
+  data = {
+    // shopName: result.shopName,
+    // shopOwnerName: result.shopOwnerName,
+    // shopEmail: result.shopEmail,
+    // shopPhone: result.shopPhone,
+    // shopStreet: result.shopStreet,
+    // shopCity: result.shopCity,
+    // shopZip: result.shopZip,
+    // shopOwnDelivery: result.shopOwnDelivery,
+    // shopLogoURL: result.shopLogoURL,
+    // owner: data.owner,
+    shopId: result._id,
+  };
+  res.json(data);
+};
+
 const getShopInfo = async (req, res) => {
   const { shopId } = req.params;
   console.log(req.params);
@@ -42,7 +68,7 @@ const getShopInfo = async (req, res) => {
     shopZip: result.shopZip,
     shopOwnDelivery: result.shopOwnDelivery,
     shopLogoURL: result.shopLogoURL,
-    owner: data.owner,
+    owner: result.owner,
     _id: result._id,
   };
   res.json(data);
@@ -73,7 +99,7 @@ const createShop = async (req, res) => {
     shopZip: result.shopZip,
     shopOwnDelivery: result.shopOwnDelivery,
     shopLogoURL: result.shopLogoURL,
-    owner: data.owner,
+    owner: result.owner,
     _id: result._id,
   };
   res.status(201).json(data);
@@ -113,7 +139,7 @@ const updateShop = async (req, res) => {
       shopZip: result.shopZip,
       shopOwnDelivery: result.shopOwnDelivery,
       shopLogoURL: result.shopLogoURL,
-      owner: data.owner,
+      owner: result.owner,
       _id: result._id,
     };
     res.status(200).json(data);
@@ -140,7 +166,7 @@ const updateShop = async (req, res) => {
       shopZip: result.shopZip,
       shopOwnDelivery: result.shopOwnDelivery,
       shopLogoURL: result.shopLogoURL,
-      owner: data.owner,
+      owner: result.owner,
       _id: result._id,
     };
     res.status(200).json(data);
@@ -159,7 +185,7 @@ const updateShop = async (req, res) => {
 };
 
 export default {
-  // getAllContacts: ctrlWrapper(getAllContacts),
+  getShopId: ctrlWrapper(getShopId),
   getShopInfo: ctrlWrapper(getShopInfo),
   // deleteContact: ctrlWrapper(deleteContact),
   createShop: ctrlWrapper(createShop),

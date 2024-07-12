@@ -14,7 +14,7 @@ const shopsRouter = express.Router();
 shopsRouter.use(authtenticate);
 
 const {
-  // getAllContacts,
+  getShopId,
   getShopInfo,
   // deleteContact,
   createShop,
@@ -32,6 +32,7 @@ const {
   deleteProduct,
 } = productsControllers;
 
+shopsRouter.get("/own/:id", isValidId, getShopId);
 shopsRouter.get("/:shopId", isValidShopId, getShopInfo);
 
 shopsRouter.post(
