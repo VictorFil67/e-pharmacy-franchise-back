@@ -69,16 +69,13 @@ const updateProduct = async (req, res) => {
 const updateProductImg = async (req, res) => {
   const { _id: owner } = req.user;
   const { productId: _id } = req.params;
-  const { url: productImgURL } = await cloudinary.uploader.upload(
-    req.file.path,
-    {
-      folder: "productImges",
-    }
-  );
+  const { url: photo } = await cloudinary.uploader.upload(req.file.path, {
+    folder: "productImges",
+  });
   const { path: oldPath } = req.file;
 
   await fs.rm(oldPath);
-  const result = await updateByFilter({ _id, owner }, { productImgURL });
+  const result = await updateByFilter({ _id, owner }, { photo });
   res.status(200).json(result);
 };
 

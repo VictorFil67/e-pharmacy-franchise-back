@@ -69,7 +69,7 @@ const getShopInfo = async (req, res) => {
     shopOwnDelivery: result.shopOwnDelivery,
     shopLogoURL: result.shopLogoURL,
     owner: result.owner,
-    _id: result._id,
+    shopId: result._id,
   };
   res.json(data);
 };
@@ -100,7 +100,7 @@ const createShop = async (req, res) => {
     shopOwnDelivery: result.shopOwnDelivery,
     shopLogoURL: result.shopLogoURL,
     owner: result.owner,
-    _id: result._id,
+    shopId: result._id,
   };
   res.status(201).json(data);
 };
@@ -140,7 +140,7 @@ const updateShop = async (req, res) => {
       shopOwnDelivery: result.shopOwnDelivery,
       shopLogoURL: result.shopLogoURL,
       owner: result.owner,
-      _id: result._id,
+      shopId: result._id,
     };
     res.status(200).json(data);
   } else {
@@ -167,7 +167,7 @@ const updateShop = async (req, res) => {
       shopOwnDelivery: result.shopOwnDelivery,
       shopLogoURL: result.shopLogoURL,
       owner: result.owner,
-      _id: result._id,
+      shopId: result._id,
     };
     res.status(200).json(data);
   }

@@ -1,9 +1,12 @@
 import Joi from "joi";
 
 export const createProductSchema = Joi.object({
-  medicineName: Joi.string().required(),
+  name: Joi.string().required(),
   price: Joi.number().required(),
   description: Joi.string().required(),
+  suppliers: Joi.string(),
+  stock: Joi.number(),
+  category: Joi.string(),
 });
 
 // export const updateShopSchema = Joi.object({

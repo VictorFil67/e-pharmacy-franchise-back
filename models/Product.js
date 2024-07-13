@@ -3,7 +3,7 @@ import { handleSaveError, setUpdateSetting } from "./hooks.js";
 
 const productSchema = new Schema(
   {
-    medicineName: {
+    name: {
       type: String,
       required: [true, "Set name for medicine"],
     },
@@ -15,7 +15,16 @@ const productSchema = new Schema(
       type: String,
       required: [true, "Description is required"],
     },
-    productImgURL: { type: String },
+    suppliers: {
+      type: String,
+    },
+    stock: {
+      type: Number,
+    },
+    category: {
+      type: String,
+    },
+    photo: { type: String },
     shop: {
       type: Schema.Types.ObjectId,
       ref: "shop",
