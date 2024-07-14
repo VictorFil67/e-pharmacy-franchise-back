@@ -4,6 +4,7 @@ import fs from "fs/promises";
 import cloudinary from "../helpers/cloudinary.js";
 import {
   createProduct,
+  findProduct,
   getProductById,
   listProducts,
   listProductsByFilter,
@@ -55,6 +56,13 @@ const addProduct = async (req, res) => {
 const addProductFromCatalog = async (req, res) => {
   const { productId: _id, shopId: shop } = req.params;
   const { _id: owner } = req.user;
+  const product = await findProduct({ _id, shop });
+  if (product) {
+    throw HttpError(
+      409,
+      "The shop  already has this medicine. Please choose another product."
+    );
+  }
   const result = await updateByFilter({ _id }, { owner, shop });
   if (!result) {
     throw HttpError(404);

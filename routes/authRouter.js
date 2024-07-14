@@ -19,8 +19,8 @@ const {
   logout,
   getrefreshCurrent,
   updateAvatar,
-  verify,
-  resendVerifyEmail,
+  // verify,
+  // resendVerifyEmail,
 } = authControllers;
 
 authRouter.post("/register", validateBody(signupSchema), signup);

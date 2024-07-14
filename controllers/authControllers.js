@@ -54,48 +54,48 @@ const signup = async (req, res) => {
   });
 };
 
-const verify = async (req, res) => {
-  const { verificationToken } = req.params;
-  const user = await findUser({ verificationToken });
-  // console.log(user);
-  if (!user) {
-    throw HttpError(404, "User not found");
-  }
-  await updateByFilter(
-    { _id: user._id },
-    { verify: true, verificationToken: null }
-  );
+// const verify = async (req, res) => {
+//   const { verificationToken } = req.params;
+//   const user = await findUser({ verificationToken });
+//   // console.log(user);
+//   if (!user) {
+//     throw HttpError(404, "User not found");
+//   }
+//   await updateByFilter(
+//     { _id: user._id },
+//     { verify: true, verificationToken: null }
+//   );
 
-  res.json({
-    message: "Verification successful",
-  });
-};
+//   res.json({
+//     message: "Verification successful",
+//   });
+// };
 
-const resendVerifyEmail = async (req, res) => {
-  const { email } = req.body;
-  if (!email) {
-    throw HttpError(400, "missing required field email");
-  }
-  const user = await findUser({ email });
-  if (!user) {
-    throw HttpError(404, "User not found");
-  }
-  if (user.verify) {
-    throw HttpError(400, "Verification has already been passed");
-  }
+// const resendVerifyEmail = async (req, res) => {
+//   const { email } = req.body;
+//   if (!email) {
+//     throw HttpError(400, "missing required field email");
+//   }
+//   const user = await findUser({ email });
+//   if (!user) {
+//     throw HttpError(404, "User not found");
+//   }
+//   if (user.verify) {
+//     throw HttpError(400, "Verification has already been passed");
+//   }
 
-  const verifyEmail = {
-    to: email,
-    subject: "Verify email",
-    html: `<a target="_blank" href="${BASE_URL}/users/verify/${user.verificationToken}">CLick to verify email</a>`,
-  };
+//   const verifyEmail = {
+//     to: email,
+//     subject: "Verify email",
+//     html: `<a target="_blank" href="${BASE_URL}/users/verify/${user.verificationToken}">CLick to verify email</a>`,
+//   };
 
-  await sendEmail(verifyEmail);
+//   await sendEmail(verifyEmail);
 
-  res.json({
-    message: "Verification email sent",
-  });
-};
+//   res.json({
+//     message: "Verification email sent",
+//   });
+// };
 
 const signin = async (req, res) => {
   const { email, password } = req.body;
@@ -199,8 +199,8 @@ const updateAvatar = async (req, res) => {
 
 export default {
   signup: ctrlWrapper(signup),
-  verify: ctrlWrapper(verify),
-  resendVerifyEmail: ctrlWrapper(resendVerifyEmail),
+  // verify: ctrlWrapper(verify),
+  // resendVerifyEmail: ctrlWrapper(resendVerifyEmail),
   signin: ctrlWrapper(signin),
   getCurrent: ctrlWrapper(getCurrent),
   logout: ctrlWrapper(logout),
