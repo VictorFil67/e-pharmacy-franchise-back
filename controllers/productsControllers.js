@@ -52,6 +52,16 @@ const addProduct = async (req, res) => {
   res.status(201).json(result);
 };
 
+const addProductFromCatalog = async (req, res) => {
+  const { productId: _id, shopId: shop } = req.params;
+  const { _id: owner } = req.user;
+  const result = await updateByFilter({ _id }, { owner, shop });
+  if (!result) {
+    throw HttpError(404);
+  }
+  res.json(result);
+};
+
 const updateProduct = async (req, res) => {
   console.log(req.body);
   if (Object.keys(req.body).length === 0) {
@@ -85,6 +95,7 @@ export default {
   getProductInfo: ctrlWrapper(getProductInfo),
   deleteProduct: ctrlWrapper(deleteProduct),
   addProduct: ctrlWrapper(addProduct),
+  addProductFromCatalog: ctrlWrapper(addProductFromCatalog),
   updateProduct: ctrlWrapper(updateProduct),
   updateProductImg: ctrlWrapper(updateProductImg),
 };

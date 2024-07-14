@@ -9,14 +9,11 @@ export const createProductSchema = Joi.object({
   category: Joi.string(),
 });
 
-// export const updateShopSchema = Joi.object({
-//   shopName: Joi.string(),
-//   shopOwnerName: Joi.string(),
-//   shopEmail: Joi.string().email(),
-//   shopPhone: Joi.string(),
-//   shopStreet: Joi.string(),
-//   shopCity: Joi.string(),
-//   shopZip: Joi.number().min(4),
-//   password: Joi.string().min(8),
-//   shopOwnDelivery: Joi.string(),
-// });
+export const updateProductSchema = Joi.object({
+  name: Joi.string(),
+  price: Joi.number(),
+  description: Joi.string(),
+  suppliers: Joi.string(),
+  stock: Joi.number(),
+  category: Joi.string(),
+});

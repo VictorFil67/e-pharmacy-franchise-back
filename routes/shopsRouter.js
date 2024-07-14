@@ -2,12 +2,16 @@ import express from "express";
 import shopsControllers from "../controllers/shopsControllers.js";
 import validateBody from "../decorators/validateBody.js";
 import { createShopSchema, updateShopSchema } from "../schemas/shopsSchemas.js";
-import isValidId from "../middlewares/isValidId.js";
+// import isValidId from "../middlewares/isValidId.js";
 import authtenticate from "../middlewares/authenticate.js";
 import upload from "../middlewares/upload.js";
 import productsControllers from "../controllers/productsControllers.js";
 import isValidShopId from "../middlewares/isValidShopId.js";
 import isValidProductId from "../middlewares/isValidProductId.js";
+import {
+  createProductSchema,
+  updateProductSchema,
+} from "../schemas/productsSchemas.js";
 
 const shopsRouter = express.Router();
 
@@ -26,6 +30,7 @@ const {
   getAllProducts,
   getAllShopProducts,
   addProduct,
+  addProductFromCatalog,
   updateProductImg,
   getProductInfo,
   updateProduct,
@@ -52,7 +57,12 @@ shopsRouter.put(
 
 shopsRouter.get("/all/products", getAllProducts);
 shopsRouter.get("/:shopId/product", isValidShopId, getAllShopProducts);
-shopsRouter.post("/:shopId/product/add", isValidShopId, addProduct);
+shopsRouter.post(
+  "/:shopId/product/add",
+  isValidShopId,
+  validateBody(createProductSchema),
+  addProduct
+);
 shopsRouter.get(
   "/:shopId/product/:productId",
   isValidShopId,
@@ -62,8 +72,16 @@ shopsRouter.get(
 shopsRouter.put(
   "/:shopId/product/:productId/edit",
   isValidShopId,
+  validateBody(updateProductSchema),
   isValidProductId,
   updateProduct
+);
+shopsRouter.put(
+  "/:shopId/product/:productId/add",
+  isValidShopId,
+  validateBody(updateProductSchema),
+  isValidProductId,
+  addProductFromCatalog
 );
 shopsRouter.patch(
   "/:shopId/product/:productId/Img",
