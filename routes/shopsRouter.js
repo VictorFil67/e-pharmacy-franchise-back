@@ -59,6 +59,7 @@ shopsRouter.get("/all/products", getAllProducts);
 shopsRouter.get("/:shopId/product", isValidShopId, getAllShopProducts);
 shopsRouter.post(
   "/:shopId/product/add",
+  upload.single("photo"),
   isValidShopId,
   validateBody(createProductSchema),
   addProduct

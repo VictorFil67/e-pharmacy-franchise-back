@@ -49,7 +49,13 @@ const deleteProduct = async (req, res) => {
 const addProduct = async (req, res) => {
   const { _id: owner } = req.user;
   const { shopId: shop } = req.params;
-  const result = await createProduct({ ...req.body, owner, shop });
+  const { url: photo } = await cloudinary.uploader.upload(req.file.path, {
+    folder: "productImges",
+  });
+  const { path: oldPath } = req.file;
+
+  await fs.rm(oldPath);
+  const result = await createProduct({ ...req.body, photo, owner, shop });
   res.status(201).json(result);
 };
 
