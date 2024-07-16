@@ -4,6 +4,10 @@ export function listProducts() {
   return Product.find();
 }
 
+export function getProductsCountByFilter(filter) {
+  return Product.countDocuments(filter);
+}
+
 export function listProductsByFilter(filter, query) {
   return Product.find(filter, "", query);
 }

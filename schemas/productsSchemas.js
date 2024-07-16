@@ -4,6 +4,7 @@ export const createProductSchema = Joi.object({
   name: Joi.string().required(),
   price: Joi.number().required(),
   description: Joi.string().required(),
+  // photo: Joi.any(),
   suppliers: Joi.string(),
   stock: Joi.number(),
   category: Joi.string(),

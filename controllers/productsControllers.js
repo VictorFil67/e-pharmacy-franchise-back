@@ -6,6 +6,7 @@ import {
   createProduct,
   findProduct,
   getProductById,
+  getProductsCountByFilter,
   listProducts,
   listProductsByFilter,
   removeProductByFilter,
@@ -14,17 +15,20 @@ import {
 
 const getAllProducts = async (_, res) => {
   const result = await listProducts();
+  const total = await getProductsCountByFilter();
   // console.log(id);
-  res.json(result);
+  res.json({ result, total });
 };
+
 const getAllShopProducts = async (req, res) => {
   const { shopId } = req.params;
   const result = await listProductsByFilter({ shop: shopId });
   if (!result) {
     throw HttpError(404);
   }
-  console.log(result);
-  res.json(result);
+  const total = await getProductsCountByFilter({ shop: shopId });
+  // console.log(result);
+  res.json({ result, total });
 };
 
 const getProductInfo = async (req, res) => {
