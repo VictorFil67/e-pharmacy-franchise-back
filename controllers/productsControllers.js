@@ -13,8 +13,10 @@ import {
   updateByFilter,
 } from "../services/productsServices.js";
 
-const getAllProducts = async (_, res) => {
-  const result = await listProducts();
+const getAllProducts = async (req, res) => {
+  const { page = 1, limit = 10 } = req.query;
+  const skip = (page - 1) * limit;
+  const result = await listProducts({ skip, limit });
   const total = await getProductsCountByFilter();
   // console.log(id);
   res.json({ result, total });

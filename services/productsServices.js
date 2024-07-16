@@ -1,14 +1,14 @@
 import Product from "../models/Product.js";
 
-export function listProducts() {
-  return Product.find();
+export function listProducts({ skip, limit }) {
+  return Product.find().skip(skip).limit(limit);
 }
 
 export function getProductsCountByFilter(filter) {
   return Product.countDocuments(filter);
 }
 
-export function listProductsByFilter(filter, query) {
+export function listProductsByFilter(filter, query = {}) {
   return Product.find(filter, "", query);
 }
 
