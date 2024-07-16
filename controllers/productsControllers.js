@@ -27,9 +27,11 @@ const getAllProducts = async (req, res) => {
 
 const getAllShopProducts = async (req, res) => {
   const { shopId } = req.params;
-  const { page = 1, limit = 3 } = req.query;
+  const { page = 1, limit = 3, category } = req.query;
   const skip = (page - 1) * limit;
-  const result = await listProductsByFilter({ shop: shopId }, { skip, limit });
+  const query = category ? { shop: shopId, category } : { shop: shopId };
+
+  const result = await listProductsByFilter(query, { skip, limit });
   if (!result) {
     throw HttpError(404);
   }

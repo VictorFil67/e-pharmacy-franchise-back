@@ -9,6 +9,7 @@ export function getProductsCountByFilter(filter) {
 }
 
 export function listProductsByFilter(filter, query = {}) {
+  console.log(filter);
   return Product.find(filter, "", query);
 }
 
