@@ -17,6 +17,9 @@ const getAllProducts = async (req, res) => {
   const { page = 1, limit = 10 } = req.query;
   const skip = (page - 1) * limit;
   const result = await listProducts({ skip, limit });
+  if (!result) {
+    throw HttpError(404);
+  }
   const total = await getProductsCountByFilter();
   // console.log(id);
   res.json({ result, total });
@@ -24,7 +27,9 @@ const getAllProducts = async (req, res) => {
 
 const getAllShopProducts = async (req, res) => {
   const { shopId } = req.params;
-  const result = await listProductsByFilter({ shop: shopId });
+  const { page = 1, limit = 3 } = req.query;
+  const skip = (page - 1) * limit;
+  const result = await listProductsByFilter({ shop: shopId }, { skip, limit });
   if (!result) {
     throw HttpError(404);
   }
