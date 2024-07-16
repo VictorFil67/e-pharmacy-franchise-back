@@ -14,9 +14,19 @@ import {
 } from "../services/productsServices.js";
 
 const getAllProducts = async (req, res) => {
-  const { page = 1, limit = 10 } = req.query;
+  const { page = 1, limit = 3, category, q } = req.query;
   const skip = (page - 1) * limit;
-  const result = await listProducts({ skip, limit });
+  const regex = new RegExp(q, "i"); // 'i' makes the search case insensitive
+  const query =
+    category && q
+      ? { category, name: regex }
+      : category
+      ? { category }
+      : { name: regex };
+
+  const result = query
+    ? await listProductsByFilter(query, { skip, limit })
+    : await listProducts({ skip, limit });
   if (!result) {
     throw HttpError(404);
   }
@@ -27,9 +37,17 @@ const getAllProducts = async (req, res) => {
 
 const getAllShopProducts = async (req, res) => {
   const { shopId } = req.params;
-  const { page = 1, limit = 3, category } = req.query;
+  const { page = 1, limit = 3, category, q } = req.query;
   const skip = (page - 1) * limit;
-  const query = category ? { shop: shopId, category } : { shop: shopId };
+  const regex = new RegExp(q, "i"); // 'i' makes the search case insensitive
+  const query =
+    category && q
+      ? { shop: shopId, category, name: regex }
+      : category
+      ? { shop: shopId, category }
+      : q
+      ? { shop: shopId, name: regex }
+      : { shop: shopId };
 
   const result = await listProductsByFilter(query, { skip, limit });
   if (!result) {
