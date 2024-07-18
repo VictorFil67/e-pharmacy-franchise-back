@@ -13,8 +13,8 @@ export function listProductsByFilter(filter, query = {}) {
   return Product.find(filter, "", query);
 }
 
-export function getProductById(productId) {
-  return Product.findById(productId);
+export function getProductById({ _id, shop }) {
+  return Product.findById({ _id, shop });
 }
 
 export function removeProductByFilter(filter) {

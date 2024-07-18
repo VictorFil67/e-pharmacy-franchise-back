@@ -30,7 +30,7 @@ const getAllProducts = async (req, res) => {
   if (!result) {
     throw HttpError(404);
   }
-  const total = await getProductsCountByFilter();
+  const total = await getProductsCountByFilter(category);
   // console.log(id);
   res.json({ result, total });
 };
@@ -59,8 +59,8 @@ const getAllShopProducts = async (req, res) => {
 };
 
 const getProductInfo = async (req, res) => {
-  const { productId: _id } = req.params;
-  const result = await getProductById(_id);
+  const { productId: _id, shopId: shop } = req.params;
+  const result = await getProductById({ _id, shop });
   if (!result) {
     throw HttpError(404);
   }
@@ -113,8 +113,8 @@ const updateProduct = async (req, res) => {
     throw HttpError(400, "Body must have at least one field");
   }
   const { _id: owner } = req.user;
-  const { productId: _id } = req.params;
-  const result = await updateByFilter({ _id, owner }, { ...req.body });
+  const { productId: _id, shopId: shop } = req.params;
+  const result = await updateByFilter({ _id, shop, owner }, { ...req.body });
   if (!result) {
     throw HttpError(403, `You don't have access to this action!`);
   }
