@@ -72,6 +72,7 @@ shopsRouter.get(
 );
 shopsRouter.put(
   "/:shopId/product/:productId/edit",
+  upload.single("photo"),
   isValidShopId,
   validateBody(updateProductSchema),
   isValidProductId,

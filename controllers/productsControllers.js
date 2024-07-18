@@ -108,17 +108,40 @@ const addProductFromCatalog = async (req, res) => {
 };
 
 const updateProduct = async (req, res) => {
-  console.log(req.body);
-  if (Object.keys(req.body).length === 0) {
-    throw HttpError(400, "Body must have at least one field");
-  }
+  // console.log(req.body);
   const { _id: owner } = req.user;
   const { productId: _id, shopId: shop } = req.params;
-  const result = await updateByFilter({ _id, shop, owner }, { ...req.body });
-  if (!result) {
-    throw HttpError(403, `You don't have access to this action!`);
+
+  if (req.file?.path) {
+    const { url: photo } = await cloudinary.uploader.upload(req.file.path, {
+      folder: "productImges",
+    });
+    const { path: oldPath } = req.file;
+
+    await fs.rm(oldPath);
+    const result = await updateByFilter(
+      { _id, shop, owner },
+      { ...req.body, photo }
+    );
+    if (!result) {
+      throw HttpError(404);
+    }
+    res.status(200).json(result);
+  } else {
+    console.log(req.body);
+    if (Object.keys(req.body).length === 0) {
+      throw HttpError(400, "Body must have at least one field");
+    }
+    const { photo } = await findProduct({ _id });
+    const result = await updateByFilter(
+      { _id, shop, owner },
+      { ...req.body, photo }
+    );
+    if (!result) {
+      throw HttpError(404);
+    }
+    res.status(200).json(result);
   }
-  res.status(200).json(result);
 };
 
 const updateProductImg = async (req, res) => {

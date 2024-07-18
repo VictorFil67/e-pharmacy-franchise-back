@@ -106,7 +106,7 @@ const createShop = async (req, res) => {
 };
 
 const updateShop = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
 
   const { shopId } = req.params;
   const { _id: owner } = req.user;
