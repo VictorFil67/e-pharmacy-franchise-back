@@ -92,12 +92,18 @@ shopsRouter.patch(
   isValidProductId,
   updateProductImg
 );
-shopsRouter.delete(
+shopsRouter.patch(
   "/:shopId/product/:productId/delete",
   isValidShopId,
   isValidProductId,
   deleteProduct
 );
+// shopsRouter.delete(
+//   "/:shopId/product/:productId/delete",
+//   isValidShopId,
+//   isValidProductId,
+//   deleteProduct
+// );
 
 export default shopsRouter;
 

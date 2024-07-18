@@ -69,8 +69,21 @@ const getProductInfo = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
   const { _id: owner } = req.user;
-  const { productId: _id } = req.params;
-  const result = await removeProductByFilter({ _id, owner });
+  const { productId: _id, shopId: shop } = req.params;
+
+  // const { photo, name, price, description, suppliers, stock, category } =
+  //   await findProduct({
+  //     _id,
+  //   });
+  // data = { photo, name, price, description, suppliers, stock, category };
+  // delete data.shop;
+  // delete data.owner;
+
+  // const result = await removeProductByFilter({ _id, owner });
+  const result = await updateByFilter(
+    { _id, shop, owner },
+    { shop: null, owner: null }
+  );
   if (!result) {
     throw HttpError(403, `You don't have access to this action!`);
   }
