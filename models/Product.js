@@ -1,6 +1,12 @@
 import { Schema, model } from "mongoose";
 import { handleSaveError, setUpdateSetting } from "./hooks.js";
 
+const reviewSchema = new Schema({
+  name: String,
+  rating: Number,
+  testimonial: String,
+});
+
 const productSchema = new Schema(
   {
     name: {
@@ -33,6 +39,7 @@ const productSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "user",
     },
+    reviews: [reviewSchema],
   },
   { versionKey: false }
 );

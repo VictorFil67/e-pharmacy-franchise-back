@@ -27,6 +27,7 @@ const getAllProducts = async (req, res) => {
   const result = query
     ? await listProductsByFilter(query, { skip, limit })
     : await listProducts({ skip, limit });
+  console.log(JSON.stringify(result, null, 2));
   if (!result) {
     throw HttpError(404);
   }
@@ -54,7 +55,6 @@ const getAllShopProducts = async (req, res) => {
     throw HttpError(404);
   }
   const total = await getProductsCountByFilter({ shop: shopId });
-  // console.log(result);
   res.json({ result, total });
 };
 
