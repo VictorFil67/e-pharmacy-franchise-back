@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 
 import shopsRouter from "./routes/shopsRouter.js";
 import authRouter from "./routes/authRouter.js";
+import statisticsRouter from "./routes/statisticsRouter.js";
 // import productsRouter from "./routes/productsRouter.js";
 
 dotenv.config();
@@ -19,6 +20,7 @@ app.use(express.static("public"));
 
 app.use("/api/user", authRouter);
 app.use("/api/shop", shopsRouter);
+app.use("/api", statisticsRouter);
 
 app.use((_, res) => {
   res.status(404).json({ message: "Route not found" });

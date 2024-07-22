@@ -27,7 +27,7 @@ const getAllProducts = async (req, res) => {
   const result = query
     ? await listProductsByFilter(query, { skip, limit })
     : await listProducts({ skip, limit });
-  console.log(JSON.stringify(result, null, 2));
+  // console.log(JSON.stringify(result, null, 2));
   if (!result) {
     throw HttpError(404);
   }
