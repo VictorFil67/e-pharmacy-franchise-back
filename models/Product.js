@@ -7,6 +7,13 @@ const reviewSchema = new Schema({
   testimonial: String,
 });
 
+// const clientSchema = new Schema({
+//   clientId: {
+//     type: Schema.Types.ObjectId,
+//     ref: "client",
+//   },
+// });
+
 const productSchema = new Schema(
   {
     name: {
@@ -39,6 +46,7 @@ const productSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "user",
     },
+    clients: [{ type: Schema.Types.ObjectId }],
     reviews: [reviewSchema],
   },
   { versionKey: false }

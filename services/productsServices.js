@@ -1,4 +1,6 @@
 import Product from "../models/Product.js";
+import mongoose from "mongoose";
+import HttpError from "../helpers/HttpError.js";
 
 export function listProducts({ skip, limit }) {
   return Product.find().skip(skip).limit(limit);
@@ -28,3 +30,21 @@ export const updateByFilter = (filter, data) =>
   Product.findOneAndUpdate(filter, data);
 
 export const findProduct = (filter) => Product.findOne(filter);
+
+export function getClient(targetValue) {
+  // if (!mongoose.Types.ObjectId.isValid(targetValue)) {
+  //   throw HttpError(400, "Invalid ObjectId");
+  // }
+
+  // const targetObjectId = new mongoose.Types.ObjectId(targetValue);
+  return Product.find({ clients: targetValue });
+}
+// export function getClient() {
+//   return Product.find({
+//     reviews: {
+//       $elemMatch: {
+//         rating: 5,
+//       },
+//     },
+//   });
+// }

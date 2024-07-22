@@ -1,10 +1,12 @@
 import HttpError from "../helpers/HttpError.js";
 import ctrlWrapper from "../decorators/ctrlWrapper.js";
+import mongoose from "mongoose";
 import fs from "fs/promises";
 import cloudinary from "../helpers/cloudinary.js";
 import {
   createProduct,
   findProduct,
+  getClient,
   getProductById,
   getProductsCountByFilter,
   listProducts,
@@ -170,6 +172,19 @@ const updateProductImg = async (req, res) => {
   res.status(200).json(result);
 };
 
+const getClientProducts = async (req, res) => {
+  const { clientId } = req.params;
+  console.log(clientId);
+  // if (!mongoose.Types.ObjectId.isValid(clientId)) {
+  //   throw new HttpError(400, "Invalid ObjectId");
+  // }
+  const result = await getClient(clientId);
+  if (!result || result.length === 0) {
+    throw HttpError(404);
+  }
+  res.json(result);
+};
+
 export default {
   getAllProducts: ctrlWrapper(getAllProducts),
   getAllShopProducts: ctrlWrapper(getAllShopProducts),
@@ -179,4 +194,5 @@ export default {
   addProductFromCatalog: ctrlWrapper(addProductFromCatalog),
   updateProduct: ctrlWrapper(updateProduct),
   updateProductImg: ctrlWrapper(updateProductImg),
+  getClientProducts: ctrlWrapper(getClientProducts),
 };

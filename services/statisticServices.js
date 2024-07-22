@@ -1,5 +1,5 @@
 import Statistic from "../models/Statistic.js";
 
 export function getShopStatistics() {
-  return Statistic.find();
+  return Statistic.findOne();
 }
